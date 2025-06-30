@@ -1,10 +1,13 @@
 # Usually a good idea to write down the steps to an algorithm before writing in a language so you have a decent mental map of how to properly write the algorithm.
 
+# General Rules:
+# - All Sorting Algorithms run n - 1 times.
+
 import numpy
 import os
 os.system("cls")
 
-dataset = numpy.random.randint(5000, size=100) # Max 5000, 100 Entries
+dataset = (numpy.random.randint(5000, size=100)).tolist() # Max 5000, 100 Entries
 
 minVal = dataset[0]
 
@@ -50,4 +53,33 @@ def bubbleSortImproved(set): # Stops swapping after one swap per inner loop. Mak
     
     print("Ordered List:", set)
 
-bubbleSortImproved(dataset)
+# Selection Sort:
+# MinVal Variable
+# Go through each element of an array
+# Per loop, shove smallest element to the front of the array
+# Run this for len - 1
+
+def selectionSort(set): # This one wasn't fun to try guess LOL
+    num = len(set)
+    for i in range(num - 1):
+        minIndex = i
+        for j in range(i + 1, num):
+            if set[j] < set[minIndex]:
+                minIndex = j
+        minVal = set.pop(minIndex)
+        set.insert(i, minVal)
+
+    print("Ordered List:", set)
+
+def selectionSortImproved(set): # Uses Swapping Values instead of Index -> Grab and Insert
+    num = len(set)
+    for i in range(num - 1):
+        minIndex = i
+        for j in range(i + 1, num):
+            if set[j] < set[minIndex]:
+                minIndex = j
+        set[i], set[minIndex] = set[minIndex], set[i]
+
+    print("Ordered List:", set)
+
+selectionSortImproved(dataset)
