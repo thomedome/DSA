@@ -13,6 +13,14 @@ minVal = dataset[0]
 
 print("Unsorted Set:", dataset, "\n")
 
+for i in range(len(dataset)):
+    for j in range(len(dataset) - i - 1):
+        if dataset[j] > dataset[j + 1]:
+            dataset[j], dataset[j + 1] = dataset[j + 1], dataset[j]
+        else:
+            break
+
+
 def getMinValLinear(set):
     for i in range(len(set) - 1):
         print("Comparing", set[i], "to", minVal)
@@ -48,7 +56,7 @@ def bubbleSortImproved(set): # Stops swapping after one swap per inner loop. Mak
             if set[j] > set[j + 1]:
                 set[j], set[j + 1] = set[j + 1], set[j]
                 swapped = True
-        if not swapped:
+        if swapped:
             break
     
     print("Ordered List:", set)
@@ -82,4 +90,35 @@ def selectionSortImproved(set): # Uses Swapping Values instead of Index -> Grab 
 
     print("Ordered List:", set)
 
-selectionSortImproved(dataset)
+# Insertion Sort
+# Uses one part of the array as the sorted side, other half is unsorted until end of loops
+
+def insertionSort(set):
+    num = len(set)
+    for i in range(1, num):
+        insertIndex = i
+        currValue = set.pop(i)
+
+        for j in range(i - 1, -1, -1):
+            if set[j] > currValue:
+                insertIndex = j
+        set.insert(insertIndex, currValue)
+
+    print("Ordered List:", set)
+
+def insertionSortImproved(set):
+    num = len(set)
+    for i in range(1, num):
+        insertIndex = i
+        currValue = set[i]
+        for j in range(i - 1, -1, -1):
+            if set[j] > currValue:
+                set[j + 1] = set[j]
+                insertIndex = j
+            else:
+                break
+        set[insertIndex] = currValue
+
+    print("Ordered List", set)
+
+insertionSortImproved(dataset)
